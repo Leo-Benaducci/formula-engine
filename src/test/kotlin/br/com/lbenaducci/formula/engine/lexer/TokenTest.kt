@@ -1,5 +1,6 @@
 package br.com.lbenaducci.formula.engine.lexer
 
+import br.com.lbenaducci.formula.engine.lexer.types.TokenType
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.assertThrows
 import org.mockito.kotlin.doReturn
@@ -36,7 +37,7 @@ class TokenTest {
         @Test
         fun `given token, then return string representation`() {
             val type = mock<TokenType> {
-                on { literal } doReturn "mock"
+                on { alias } doReturn "mock"
             }
             val lexeme = "lexeme"
             val position = 0

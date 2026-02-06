@@ -1,5 +1,7 @@
 package br.com.lbenaducci.formula.engine.lexer
 
+import br.com.lbenaducci.formula.engine.lexer.types.TokenType
+
 data class Token(
     val type: TokenType,
     val lexeme: String,
@@ -10,6 +12,6 @@ data class Token(
     }
 
     override fun toString(): String {
-        return "${type.literal}($lexeme, $position)"
+        return "${type.alias}($lexeme, $position)"
     }
 }
