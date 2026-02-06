@@ -9,12 +9,17 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    val mockitoVersion: String by project
+val mockitoAgent = configurations.create("mockitoAgent")
 
+dependencies {
     testImplementation(kotlin("test"))
-    testImplementation("org.mockito.kotlin:mockito-kotlin:$mockitoVersion")
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.mockito.core)
+    mockitoAgent(libs.mockito.core) {
+        isTransitive = false
+    }
 }
+
 
 kotlin {
     jvmToolchain(21)
@@ -22,4 +27,8 @@ kotlin {
 
 tasks.test {
     useJUnitPlatform()
+    jvmArgs(
+        "-javaagent:${mockitoAgent.singleFile.absolutePath}",
+        "-Xshare:off"
+    )
 }
