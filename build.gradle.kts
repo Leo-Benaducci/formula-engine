@@ -10,7 +10,10 @@ repositories {
 }
 
 dependencies {
+    val mockitoVersion: String by project
+
     testImplementation(kotlin("test"))
+    testImplementation("org.mockito.kotlin:mockito-kotlin:$mockitoVersion")
 }
 
 kotlin {
