@@ -35,7 +35,7 @@ class EqualityTest {
     @Nested
     inner class Tokenize {
         @Test
-        fun `given lexer, then return token`() {
+        fun `given carriage, then return token`() {
             val carriage = mock<Carriage> {
                 on { peek() } doReturn '='
                 on { position } doReturn 0
