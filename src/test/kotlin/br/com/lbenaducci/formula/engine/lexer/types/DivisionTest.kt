@@ -10,25 +10,25 @@ import kotlin.test.assertFalse
 import kotlin.test.assertIs
 import kotlin.test.assertTrue
 
-class PlusTest {
+class DivisionTest {
     @Nested
     inner class Alias {
         @Test
         fun `then return alias`() {
-            assertEquals("PLUS", Plus.alias)
+            assertEquals("DIVIDED BY", Division.alias)
         }
     }
 
     @Nested
     inner class Matches {
         @Test
-        fun `given plus char, then return true`() {
-            assertTrue { Plus.matches('+') }
+        fun `given slash char, then return true`() {
+            assertTrue { Division.matches('/') }
         }
 
         @Test
         fun `given other char, then return false`() {
-            assertFalse { Plus.matches('a') }
+            assertFalse { Division.matches('a') }
         }
     }
 
@@ -37,14 +37,14 @@ class PlusTest {
         @Test
         fun `given lexer, then return token`() {
             val carriage = mock<Carriage> {
-                on { peek() } doReturn '+'
+                on { peek() } doReturn '/'
                 on { position } doReturn 0
             }
 
-            val token = Plus.tokenize(carriage)
+            val token = Division.tokenize(carriage)
 
-            assertIs<Plus>(token.type)
-            assertEquals("+", token.lexeme)
+            assertIs<Division>(token.type)
+            assertEquals("/", token.lexeme)
             assertEquals(0, token.position)
         }
     }

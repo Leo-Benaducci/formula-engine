@@ -10,25 +10,25 @@ import kotlin.test.assertFalse
 import kotlin.test.assertIs
 import kotlin.test.assertTrue
 
-class DividedTest {
+class EqualityTest {
     @Nested
     inner class Alias {
         @Test
         fun `then return alias`() {
-            assertEquals("DIVIDED BY", Divided.alias)
+            assertEquals("EQUALS", Equality.alias)
         }
     }
 
     @Nested
     inner class Matches {
         @Test
-        fun `given slash char, then return true`() {
-            assertTrue { Divided.matches('/') }
+        fun `given equal char, then return true`() {
+            assertTrue { Equality.matches('=') }
         }
 
         @Test
         fun `given other char, then return false`() {
-            assertFalse { Divided.matches('a') }
+            assertFalse { Equality.matches('a') }
         }
     }
 
@@ -37,14 +37,14 @@ class DividedTest {
         @Test
         fun `given lexer, then return token`() {
             val carriage = mock<Carriage> {
-                on { peek() } doReturn '/'
+                on { peek() } doReturn '='
                 on { position } doReturn 0
             }
 
-            val token = Divided.tokenize(carriage)
+            val token = Equality.tokenize(carriage)
 
-            assertIs<Divided>(token.type)
-            assertEquals("/", token.lexeme)
+            assertIs<Equality>(token.type)
+            assertEquals("=", token.lexeme)
             assertEquals(0, token.position)
         }
     }

@@ -3,7 +3,7 @@ package br.com.lbenaducci.formula.engine.lexer.types
 import br.com.lbenaducci.formula.engine.lexer.Carriage
 import br.com.lbenaducci.formula.engine.lexer.Token
 
-object Times : TokenType {
+object Multiplication : TokenType {
     override val alias: String
         get() = "TIMES"
 

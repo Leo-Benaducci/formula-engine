@@ -10,25 +10,25 @@ import kotlin.test.assertFalse
 import kotlin.test.assertIs
 import kotlin.test.assertTrue
 
-class AssignTest {
+class MultiplicationTest {
     @Nested
     inner class Alias {
         @Test
         fun `then return alias`() {
-            assertEquals("ASSIGN", Assign.alias)
+            assertEquals("TIMES", Multiplication.alias)
         }
     }
 
     @Nested
     inner class Matches {
         @Test
-        fun `given equal char, then return true`() {
-            assertTrue { Assign.matches('=') }
+        fun `given star char, then return true`() {
+            assertTrue { Multiplication.matches('*') }
         }
 
         @Test
         fun `given other char, then return false`() {
-            assertFalse { Assign.matches('a') }
+            assertFalse { Multiplication.matches('a') }
         }
     }
 
@@ -37,14 +37,14 @@ class AssignTest {
         @Test
         fun `given lexer, then return token`() {
             val carriage = mock<Carriage> {
-                on { peek() } doReturn '='
+                on { peek() } doReturn '*'
                 on { position } doReturn 0
             }
 
-            val token = Assign.tokenize(carriage)
+            val token = Multiplication.tokenize(carriage)
 
-            assertIs<Assign>(token.type)
-            assertEquals("=", token.lexeme)
+            assertIs<Multiplication>(token.type)
+            assertEquals("*", token.lexeme)
             assertEquals(0, token.position)
         }
     }
