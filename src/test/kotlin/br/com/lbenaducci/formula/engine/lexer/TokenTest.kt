@@ -1,5 +1,6 @@
 package br.com.lbenaducci.formula.engine.lexer
 
+import br.com.lbenaducci.formula.engine.lexer.types.CompoundedTokenType
 import br.com.lbenaducci.formula.engine.lexer.types.TokenType
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.assertThrows
@@ -35,14 +36,25 @@ class TokenTest {
     @Nested
     inner class ToString {
         @Test
-        fun `given token, then return string representation`() {
+        fun `given token type, then return string representation`() {
             val type = mock<TokenType> {
                 on { alias } doReturn "mock"
             }
             val lexeme = "lexeme"
             val position = 0
             val token = Token(type, lexeme, position)
-            assertEquals("mock(lexeme, 0)", token.toString())
+            assertEquals("0:mock", token.toString())
+        }
+
+        @Test
+        fun `given compounded token type, then return string representation`() {
+            val type = mock<CompoundedTokenType> {
+                on { alias } doReturn "mock"
+            }
+            val lexeme = "lexeme"
+            val position = 0
+            val token = Token(type, lexeme, position)
+            assertEquals("0:mock(\"lexeme\")", token.toString())
         }
     }
 }

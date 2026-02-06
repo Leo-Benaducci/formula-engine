@@ -3,7 +3,7 @@ package br.com.lbenaducci.formula.engine.lexer.types
 import br.com.lbenaducci.formula.engine.lexer.Carriage
 import br.com.lbenaducci.formula.engine.lexer.Token
 
-object Number : TokenType {
+object Number : CompoundedTokenType {
     override val alias: String
         get() = "NUMBER"
 

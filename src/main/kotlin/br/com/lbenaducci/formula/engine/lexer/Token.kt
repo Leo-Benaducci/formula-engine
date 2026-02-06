@@ -1,5 +1,6 @@
 package br.com.lbenaducci.formula.engine.lexer
 
+import br.com.lbenaducci.formula.engine.lexer.types.CompoundedTokenType
 import br.com.lbenaducci.formula.engine.lexer.types.TokenType
 
 data class Token(
@@ -12,6 +13,9 @@ data class Token(
     }
 
     override fun toString(): String {
-        return "${type.alias}($lexeme, $position)"
+        if (type is CompoundedTokenType) {
+            return "$position:${type.alias}(\"$lexeme\")"
+        }
+        return "$position:${type.alias}"
     }
 }
