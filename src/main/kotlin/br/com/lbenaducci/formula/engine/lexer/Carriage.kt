@@ -1,9 +1,22 @@
 package br.com.lbenaducci.formula.engine.lexer
 
-interface Carriage {
-    val position: Int
+class Carriage(
+    private val content: String
+) {
+    var position: Int = 0
+        private set
 
-    fun advance()
+    fun peek(): Char {
+        if (position >= content.length) {
+            return '\u0000'
+        }
+        return content[position]
+    }
 
-    fun peek(): Char
+    fun advance() {
+        if (position >= content.length) {
+            return
+        }
+        position++
+    }
 }
