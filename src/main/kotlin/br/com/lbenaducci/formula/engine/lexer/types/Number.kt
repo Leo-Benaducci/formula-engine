@@ -15,22 +15,10 @@ object Number : CompoundedTokenType {
         val start = carriage.position
         var peek = carriage.peek()
         val lexeme = StringBuilder()
-        val consumeDigit = { digit: Char ->
-            lexeme.append(digit)
+        while (peek.isDigit() || peek == '.') {
+            lexeme.append(peek)
             carriage.advance()
-        }
-
-        while (matches(peek)) {
-            consumeDigit(peek)
             peek = carriage.peek()
-        }
-        if (peek == '.') {
-            consumeDigit(peek)
-            peek = carriage.peek()
-            while (matches(peek)) {
-                consumeDigit(peek)
-                peek = carriage.peek()
-            }
         }
         return Token(this, lexeme.toString(), start)
     }
