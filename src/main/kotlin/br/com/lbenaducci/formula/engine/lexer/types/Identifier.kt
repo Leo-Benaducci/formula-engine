@@ -15,7 +15,7 @@ object Identifier : CompoundedTokenType {
         val start = carriage.position
         var peek = carriage.peek()
         val lexeme = StringBuilder()
-        while (matches(peek)) {
+        while (peek.isLetterOrDigit() || peek == '_') {
             lexeme.append(peek)
             carriage.advance()
             peek = carriage.peek()

@@ -61,5 +61,29 @@ class IdentifierTest {
             assertEquals("vBc", token.lexeme)
             assertEquals(0, token.position)
         }
+
+        @Test
+        fun `given carriage with number, then return token`() {
+            val carriage = mock<Carriage> {
+                on { peek() }.doReturn('a', '0', ' ')
+                on { position }.doReturn(0, 1, 2)
+            }
+            val token = Identifier.tokenize(carriage)
+            assertIs<Identifier>(token.type)
+            assertEquals("a0", token.lexeme)
+            assertEquals(0, token.position)
+        }
+
+        @Test
+        fun `given carriage with special char, then return token`() {
+            val carriage = mock<Carriage> {
+                on { peek() }.doReturn('a', '_', '1', ' ')
+                on { position }.doReturn(0, 1, 2)
+            }
+            val token = Identifier.tokenize(carriage)
+            assertIs<Identifier>(token.type)
+            assertEquals("a_1", token.lexeme)
+            assertEquals(0, token.position)
+        }
     }
 }
