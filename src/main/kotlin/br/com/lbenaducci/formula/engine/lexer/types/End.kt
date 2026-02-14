@@ -15,3 +15,4 @@ object End : TokenType {
         return Token(this, carriage.peek().toString(), carriage.position)
     }
 }
+

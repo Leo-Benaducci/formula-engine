@@ -10,25 +10,25 @@ import kotlin.test.assertFalse
 import kotlin.test.assertIs
 import kotlin.test.assertTrue
 
-class SubtractionTest {
+class SlashTest {
     @Nested
     inner class Alias {
         @Test
         fun `then return alias`() {
-            assertEquals("MINUS", Subtraction.alias)
+            assertEquals("DIVIDED BY", Slash.alias)
         }
     }
 
     @Nested
     inner class Matches {
         @Test
-        fun `given minus char, then return true`() {
-            assertTrue { Subtraction.matches('-') }
+        fun `given slash char, then return true`() {
+            assertTrue { Slash.matches('/') }
         }
 
         @Test
         fun `given other char, then return false`() {
-            assertFalse { Subtraction.matches('a') }
+            assertFalse { Slash.matches('a') }
         }
     }
 
@@ -37,14 +37,14 @@ class SubtractionTest {
         @Test
         fun `given carriage, then return token`() {
             val carriage = mock<Carriage> {
-                on { peek() } doReturn '-'
+                on { peek() } doReturn '/'
                 on { position } doReturn 0
             }
 
-            val token = Subtraction.tokenize(carriage)
+            val token = Slash.tokenize(carriage)
 
-            assertIs<Subtraction>(token.type)
-            assertEquals("-", token.lexeme)
+            assertIs<Slash>(token.type)
+            assertEquals("/", token.lexeme)
             assertEquals(0, token.position)
         }
     }

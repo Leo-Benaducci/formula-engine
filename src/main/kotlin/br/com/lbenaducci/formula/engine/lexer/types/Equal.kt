@@ -3,12 +3,12 @@ package br.com.lbenaducci.formula.engine.lexer.types
 import br.com.lbenaducci.formula.engine.lexer.Carriage
 import br.com.lbenaducci.formula.engine.lexer.Token
 
-object Addition : TokenType {
+object Equal : TokenType {
     override val alias: String
-        get() = "PLUS"
+        get() = "EQUALS"
 
     override fun matches(char: Char): Boolean {
-        return char == '+'
+        return char == '='
     }
 
     override fun tokenize(carriage: Carriage): Token {

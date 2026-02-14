@@ -10,25 +10,25 @@ import kotlin.test.assertFalse
 import kotlin.test.assertIs
 import kotlin.test.assertTrue
 
-class AdditionTest {
+class MinusTest {
     @Nested
     inner class Alias {
         @Test
         fun `then return alias`() {
-            assertEquals("PLUS", Addition.alias)
+            assertEquals("MINUS", Minus.alias)
         }
     }
 
     @Nested
     inner class Matches {
         @Test
-        fun `given plus char, then return true`() {
-            assertTrue { Addition.matches('+') }
+        fun `given minus char, then return true`() {
+            assertTrue { Minus.matches('-') }
         }
 
         @Test
         fun `given other char, then return false`() {
-            assertFalse { Addition.matches('a') }
+            assertFalse { Minus.matches('a') }
         }
     }
 
@@ -37,14 +37,14 @@ class AdditionTest {
         @Test
         fun `given carriage, then return token`() {
             val carriage = mock<Carriage> {
-                on { peek() } doReturn '+'
+                on { peek() } doReturn '-'
                 on { position } doReturn 0
             }
 
-            val token = Addition.tokenize(carriage)
+            val token = Minus.tokenize(carriage)
 
-            assertIs<Addition>(token.type)
-            assertEquals("+", token.lexeme)
+            assertIs<Minus>(token.type)
+            assertEquals("-", token.lexeme)
             assertEquals(0, token.position)
         }
     }

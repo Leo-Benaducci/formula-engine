@@ -51,14 +51,14 @@ class LexerTest {
         @Test
         fun `given content for a simple token, then return token`() {
             val content = "+"
-            val tokenTypes = listOf(Addition)
+            val tokenTypes = listOf(Plus)
             val lexer = Lexer(content, tokenTypes)
 
             val tokens = lexer.tokenize()
 
             assertNotNull(tokens)
             assertEquals(2, tokens.size)
-            assertIs<Addition>(tokens[0].type)
+            assertIs<Plus>(tokens[0].type)
             assertIs<End>(tokens[1].type)
         }
 
@@ -82,7 +82,7 @@ class LexerTest {
         @Test
         fun `given content for multiple tokens, then return tokens`() {
             val content = "sum = 10 + 5"
-            val tokenTypes = listOf(Addition, Identifier, Equality, Number)
+            val tokenTypes = listOf(Plus, Identifier, Equal, Number)
             val lexer = Lexer(content, tokenTypes)
 
             val tokens = lexer.tokenize()
@@ -91,12 +91,12 @@ class LexerTest {
             assertEquals(6, tokens.size)
             assertIs<Identifier>(tokens[0].type)
             assertEquals("sum", tokens[0].lexeme)
-            assertIs<Equality>(tokens[1].type)
+            assertIs<Equal>(tokens[1].type)
             assertEquals(4, tokens[1].position)
             assertIs<Number>(tokens[2].type)
             assertEquals("10", tokens[2].lexeme)
             assertEquals(6, tokens[2].position)
-            assertIs<Addition>(tokens[3].type)
+            assertIs<Plus>(tokens[3].type)
             assertEquals(9, tokens[3].position)
             assertIs<Number>(tokens[4].type)
             assertEquals("5", tokens[4].lexeme)
@@ -108,7 +108,7 @@ class LexerTest {
         @Test
         fun `given content for multiple tokens with spaces, then return tokens`() {
             val content = "  a    =    1.5  "
-            val tokenTypes = listOf(Identifier, Equality, Number)
+            val tokenTypes = listOf(Identifier, Equal, Number)
             val lexer = Lexer(content, tokenTypes)
 
             val tokens = lexer.tokenize()
@@ -118,7 +118,7 @@ class LexerTest {
             assertIs<Identifier>(tokens[0].type)
             assertEquals("a", tokens[0].lexeme)
             assertEquals(2, tokens[0].position)
-            assertIs<Equality>(tokens[1].type)
+            assertIs<Equal>(tokens[1].type)
             assertEquals(7, tokens[1].position)
             assertIs<Number>(tokens[2].type)
             assertEquals("1.5", tokens[2].lexeme)
@@ -130,7 +130,7 @@ class LexerTest {
         @Test
         fun `given content with unresolved token, then throw exception`() {
             val content = "a = 10@5"
-            val tokenTypes = listOf(Identifier, Equality, Number)
+            val tokenTypes = listOf(Identifier, Equal, Number)
             val lexer = Lexer(content, tokenTypes)
 
             assertThrows<LexicalException> { lexer.tokenize() }.also {

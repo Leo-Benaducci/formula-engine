@@ -3,7 +3,7 @@ package br.com.lbenaducci.formula.engine.lexer.types
 import br.com.lbenaducci.formula.engine.lexer.Carriage
 import br.com.lbenaducci.formula.engine.lexer.Token
 
-object Division : TokenType {
+object Slash : TokenType {
     override val alias: String
         get() = "DIVIDED BY"
 

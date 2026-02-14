@@ -30,7 +30,7 @@ class Lexer(
             if (type == End) {
                 return tokens
             }
-            if(type !is CompoundedTokenType) {
+            if (type !is CompoundedTokenType) {
                 carriage.advance()
             }
         }

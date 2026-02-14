@@ -10,12 +10,12 @@ import kotlin.test.assertFalse
 import kotlin.test.assertIs
 import kotlin.test.assertTrue
 
-class EqualityTest {
+class EqualTest {
     @Nested
     inner class Alias {
         @Test
         fun `then return alias`() {
-            assertEquals("EQUALS", Equality.alias)
+            assertEquals("EQUALS", Equal.alias)
         }
     }
 
@@ -23,12 +23,12 @@ class EqualityTest {
     inner class Matches {
         @Test
         fun `given equal char, then return true`() {
-            assertTrue { Equality.matches('=') }
+            assertTrue { Equal.matches('=') }
         }
 
         @Test
         fun `given other char, then return false`() {
-            assertFalse { Equality.matches('a') }
+            assertFalse { Equal.matches('a') }
         }
     }
 
@@ -41,9 +41,9 @@ class EqualityTest {
                 on { position } doReturn 0
             }
 
-            val token = Equality.tokenize(carriage)
+            val token = Equal.tokenize(carriage)
 
-            assertIs<Equality>(token.type)
+            assertIs<Equal>(token.type)
             assertEquals("=", token.lexeme)
             assertEquals(0, token.position)
         }
