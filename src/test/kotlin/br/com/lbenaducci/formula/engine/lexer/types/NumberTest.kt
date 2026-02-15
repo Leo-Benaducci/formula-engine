@@ -75,5 +75,19 @@ class NumberTest {
             assertEquals("1", token.lexeme)
             assertEquals(0, token.position)
         }
+
+        @Test
+        fun `given carriage with multiple decimal separators, then return token`() {
+            val carriage = mock<Carriage> {
+                on { peek() }.doReturn('1', '.', '5', '.', '2', ' ')
+                on { position }.doReturn(0, 1, 2, 3, 4, 5)
+            }
+
+            val token = Number.tokenize(carriage)
+
+            assertIs<Number>(token.type)
+            assertEquals("1.5", token.lexeme)
+            assertEquals(0, token.position)
+        }
     }
 }

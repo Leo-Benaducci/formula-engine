@@ -15,7 +15,11 @@ object Number : CompoundedTokenType {
         val start = carriage.position
         var peek = carriage.peek()
         val lexeme = StringBuilder()
-        while (peek.isDigit() || peek == '.') {
+        var hasDecimal = false
+        while (peek.isDigit() || (peek == '.' && !hasDecimal)) {
+            if (peek == '.') {
+                hasDecimal = true
+            }
             lexeme.append(peek)
             carriage.advance()
             peek = carriage.peek()
